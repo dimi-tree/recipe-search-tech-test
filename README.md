@@ -89,6 +89,7 @@ Exec time: 0:00:00.034121
 
 # NOTE: the results in bold are the exact matches,
 #       i.e. recipes that contain all search terms
+#       (this won't be visible in this doc)
 $ python recipe_search.py find "broccoli stilton soup"
 broccoli-soup-with-stilton.txt
 kale-potato-28-celeriac-29-stilton-pie.txt
