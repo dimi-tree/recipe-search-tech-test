@@ -1,4 +1,9 @@
-## Recipe search
+# Recipe search
+
+- [Recipe search](#recipe-search)
+  - [Essential requirements:](#essential-requirements)
+  - [Technical Notes](#technical-notes)
+  - [Solution](#solution)
 
 We have to give users the ability to search for recipes. We have some text files containing recipe descriptions written in English. We would like to be able to search over the set of these text files to find recipes given at a minimum a single word e.g. `tomato`.
 
@@ -40,3 +45,77 @@ You can spend as long or as little as you would like on the test, it does not ha
 Please host the program source on github.com (e.g by forking this repo), gitlab.com or provide a link to a zip file on google drive. Let me know you’ve done it by sending a link to danielstone@riverford.co.uk.
 
 Good luck!
+
+
+## Solution
+
+The solution is written in Python 3, with no external dependencies. It's been tested on MacOS platform only.
+
+The example of how to run the CLI is shown below ↓.
+```bash
+$ python recipe_search.py -h 
+usage: recipe_search.py [-h] <command>         ...
+
+Recipe Search
+
+optional arguments:
+  -h, --help         show this help message and exit
+
+Commands:
+  <command>        
+    create_database  Create recipe database
+    add_recipe       Add a new recipe to database
+    find             Search recipe database
+
+$ python recipe_search.py create_database -h
+usage: recipe_search.py create_database [-h] path_to_recipes
+
+positional arguments:
+  path_to_recipes  Path to directory where recipe txt files are located
+
+optional arguments:
+  -h, --help       show this help message and exit
+
+$ python recipe_search.py create_database ~/Downloads/recipes 
+Database created!
+
+Exec time: 0:00:02.166500
+
+# NOTE: this operation is idempotent
+$ python recipe_search.py add_recipe ~/Downloads/recipes/sweet-potato-and-lentil-bake.txt
+Recipe added!
+
+Exec time: 0:00:00.034121
+
+# NOTE: the results in bold are the exact matches,
+#       i.e. recipes that contain all search terms
+$ python recipe_search.py find "broccoli stilton soup"
+broccoli-soup-with-stilton.txt
+kale-potato-28-celeriac-29-stilton-pie.txt
+broccoli-shiitake-hoisin-stirfry.txt
+french-onion-soup.txt
+pork-spare-rib-steaks-with-pear-stilton.txt
+
+Exec time: 0:00:00.030538
+
+$ python recipe_search.py find "niçoise" 
+salad-nicoise.txt
+tomato-nicoise-salad.txt
+vegetarian-nicoise.txt
+
+Exec time: 0:00:00.028761
+
+$ python recipe_search.py find -n 10 "tomato"
+roasted-tomato-and-basil-dressing.txt
+celery-in-sweet-sour-tomato-sauce.txt
+green-beans-in-tomato-sauce.txt
+spiced-aubergine-and-tomato-iman-bageldi.txt
+psb-rosemary-roasted-tomato-anchovy-dres.txt
+warm-salad-of-potatoes-tomato-chorizo.txt
+leek-tomato-crumble.txt
+tomato-and-pepper-summer-pudding.txt
+tomato-basil-sauce.txt
+samphire-broad-bean-crouton-salad.txt
+
+Exec time: 0:00:00.028941
+```
