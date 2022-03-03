@@ -49,9 +49,9 @@ Good luck!
 
 ## Solution
 
-The solution is written in Python 3, with no external dependencies. It's been tested on MacOS platform only.
+The solution is written in Python 3 in the form of a CLI, with no external dependencies. It's been tested on MacOS platform only.
 
-The example of how to run the CLI is shown below ↓.
+To run it, clone the repo, `cd` into `recipe-search-tech-test` and run some or all of the examples shown below ↓.
 ```bash
 $ python recipe_search.py -h 
 usage: recipe_search.py [-h] <command>         ...
